@@ -1,0 +1,80 @@
+<div>
+    <h2>
+        <span>Associations</span>
+        <button class="btn btn-primary float-right jh-create-entity create-association" [routerLink]="['/', { outlets: { popup: ['association-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Association
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="associations">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Name</span></th>
+            <th><span>Description</span></th>
+            <th><span>Picture</span></th>
+            <th><span>Address</span></th>
+            <th><span>Postcode</span></th>
+            <th><span>City</span></th>
+            <th><span>President</span></th>
+            <th><span>Members</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let association of associations ;trackBy: trackId">
+                <td><a [routerLink]="['../association', association.id ]">{{association.id}}</a></td>
+                <td>{{association.name}}</td>
+                <td>{{association.description}}</td>
+                <td>{{association.picture}}</td>
+                <td>{{association.address}}</td>
+                <td>{{association.postcode}}</td>
+                <td>{{association.city}}</td>
+                <td>
+                    <div *ngIf="association.president">
+                        <a [routerLink]="['../user-profile', association.president?.id ]" >{{association.president?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <span *ngFor="let members of association.members; let last = last">
+                            <a class="form-control-static" [routerLink]="['../user-profile', members?.id ]">{{members.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../association', association.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'association/'+ association.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'association/'+ association.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

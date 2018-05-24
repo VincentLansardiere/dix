@@ -1,0 +1,65 @@
+entity UserProfile {
+	last_name String required
+    first_name String required
+    birth_date LocalDate required
+    address String required
+    postcode String required
+    mail String required
+    city String required
+    mobile_phone String
+    home_phone String
+}
+
+entity Association {
+	name String required
+    description String required
+    picture String required
+    address String required
+    postcode String required
+    city String required
+}
+
+entity Event {
+	name String required
+    description String required
+    picture String
+    location String required
+    startDate LocalDate required
+    endDate LocalDate required
+    recurrence Integer
+}
+
+entity Category {
+	name String required
+}
+
+entity UserEventParticipation {
+
+}
+
+entity AssociationUserRole {
+	role String required
+}
+
+relationship OneToOne {
+    Association { president required} to UserProfile
+}
+
+relationship ManyToOne {
+	UserProfile { user } to User
+}
+
+relationship OneToMany {
+    Association { roles } to AssociationUserRole
+    UserProfile { role } to AssociationUserRole
+    UserProfile { categories } to Category
+    Event { participants } to UserEventParticipation
+    UserProfile { participant } to UserEventParticipation
+    Association { events } to Event
+}
+
+relationship ManyToMany {
+	Association { members } to UserProfile
+}
+
+

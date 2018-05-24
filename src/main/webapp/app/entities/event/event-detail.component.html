@@ -1,0 +1,56 @@
+
+<div *ngIf="event">
+    <h2><span>Event</span> {{event.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{event.name}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{event.description}}</span>
+        </dd>
+        <dt><span>Picture</span></dt>
+        <dd>
+            <span>{{event.picture}}</span>
+        </dd>
+        <dt><span>Location</span></dt>
+        <dd>
+            <span>{{event.location}}</span>
+        </dd>
+        <dt><span>Start Date</span></dt>
+        <dd>
+            <span>{{event.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>End Date</span></dt>
+        <dd>
+            <span>{{event.endDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Recurrence</span></dt>
+        <dd>
+            <span>{{event.recurrence}}</span>
+        </dd>
+        <dt><span>Association</span></dt>
+        <dd>
+            <div *ngIf="event.association">
+                <a [routerLink]="['/association', event.association?.id]">{{event.association?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'event/'+ event.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,58 @@
+
+<div *ngIf="association">
+    <h2><span>Association</span> {{association.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{association.name}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{association.description}}</span>
+        </dd>
+        <dt><span>Picture</span></dt>
+        <dd>
+            <span>{{association.picture}}</span>
+        </dd>
+        <dt><span>Address</span></dt>
+        <dd>
+            <span>{{association.address}}</span>
+        </dd>
+        <dt><span>Postcode</span></dt>
+        <dd>
+            <span>{{association.postcode}}</span>
+        </dd>
+        <dt><span>City</span></dt>
+        <dd>
+            <span>{{association.city}}</span>
+        </dd>
+        <dt><span>President</span></dt>
+        <dd>
+            <div *ngIf="association.president">
+                <a [routerLink]="['/user-profile', association.president?.id]">{{association.president?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Members</span></dt>
+        <dd>
+            <span *ngFor="let members of association.members; let last = last">
+                <a [routerLink]="['/user-profile', members?.id ]">{{members.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'association/'+ association.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
