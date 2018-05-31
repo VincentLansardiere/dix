@@ -26,9 +26,12 @@ import {
     PageRibbonComponent,
     ErrorComponent
 } from './layouts';
+import { SearchAssociationsComponent } from './features/search-associations/search-associations.component';
+import {FeaturesModule} from './features/features.module';
 
 @NgModule({
     imports: [
+        FeaturesModule,
         BrowserModule,
         DixAppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
