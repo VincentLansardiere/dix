@@ -5,7 +5,6 @@
     <groupId>com.lpcsid.dix</groupId>
     <artifactId>dix</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
     <name>Dix</name>
 
     <properties>
