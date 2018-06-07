@@ -8,7 +8,7 @@ export const featuresRoute: Routes = [
         component: SearchAssociationsComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'searchAssociontion'
+            pageTitle: 'searchAssociation'
         }
     }
 ];
