@@ -1,7 +1,47 @@
-<p>
-  search-associations works!
-</p>
+<!--<div *ngFor="let association of associations">-->
 
-{{msgBidon}}
+    <!--{{association.name}}-->
+<!--</div>-->
 
-<div xxngFor="let e of listBidon">{{e}}</div>
+<!--<div *ngFor="let association of this.associations">
+
+    <td>{{association.name}}</td>
+    <td>{{association.description}}</td>
+    <td>{{association.picture}}</td>
+    <td>{{association.address}}</td>
+    <td>{{association.postcode}}</td>
+    <td>{{association.city}}</td>
+</div>
+
+-->
+
+<div class="table-responsive" *ngIf="associations">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><span>Name</span></th>
+           <!-- <th><span>Description</span></th>
+            <th><span>Picture</span></th>
+            <th><span>Address</span></th>
+            <th><span>Postcode</span></th>
+            <th><span>City</span></th>
+            <th><span>President</span></th>
+            <th></th> -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let association of associations ;trackBy: trackId">
+            <td>{{association.name}}</td>
+            <!--<td>{{association.description}}</td>
+            <td><img src ='{{association.picture}}'></td>
+            <td>{{association.address}}</td>
+            <td>{{association.postcode}}</td>
+            <td>{{association.city}}</td>
+            <td>-->
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
