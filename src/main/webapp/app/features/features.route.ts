@@ -11,16 +11,18 @@ export const featuresRoute: Routes = [
             authorities: ['ROLE_USER'],
             pageTitle: 'searchAssociation'
         }
-    }
-];
-
-export const featuresPopupRoute: Routes = [
+    },
     {
         path: 'create-assoc',
         component: CreateAssociationComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'createAssociation'
-        }
+        },
     }
+
+];
+
+export const featuresPopupRoute: Routes = [
+
 ];

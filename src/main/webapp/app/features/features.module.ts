@@ -16,6 +16,7 @@ const ENTITY_STATES = [
     ],
     entryComponents: [
         SearchAssociationsComponent,
+        CreateAssociationComponent
     ],
     providers: [
     ],
