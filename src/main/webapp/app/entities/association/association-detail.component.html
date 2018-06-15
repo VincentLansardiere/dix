@@ -48,7 +48,7 @@
         <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
     </button>
 
-    <button type="button"
+    <button *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_USER']" type="button"
             [routerLink]="['/', { outlets: { popup: 'association/'+ association.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"

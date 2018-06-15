@@ -9,7 +9,8 @@ const ENTITY_STATES = [
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        RouterModule
     ],
     declarations: [
         SearchAssociationsComponent,
