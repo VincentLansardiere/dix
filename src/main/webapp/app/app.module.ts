@@ -17,6 +17,7 @@ import { DixAdminModule } from './admin/admin.module';
 import { DixAccountModule } from './account/account.module';
 import { DixEntityModule } from './entities/entity.module';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import {
     JhiMainComponent,
@@ -31,6 +32,7 @@ import {FeaturesModule} from './features/features.module';
 
 @NgModule({
     imports: [
+        FormsModule,
         FeaturesModule,
         BrowserModule,
         DixAppRoutingModule,
