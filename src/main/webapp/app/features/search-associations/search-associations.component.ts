@@ -42,6 +42,10 @@ export class SearchAssociationsComponent implements OnInit, OnDestroy {
         return item.id;
     }
 
+    toto() {
+        alert('it works');
+    }
+
     loadAll() {
         this.associationService.query().subscribe(
             (res: HttpResponse<Association[]>) => {

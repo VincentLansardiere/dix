@@ -14,7 +14,6 @@
 </div>
 
 -->
-
 <div class="table-responsive" *ngIf="associations">
     <table class="table table-striped">
         <thead>
@@ -46,8 +45,30 @@
             <span class="fa fa-eye"></span>
             <span class="d-none d-md-inline">View</span>
         </button></td>
+            <td>
+            <button type="button" class="btn btn-primary btn-info" ng-click="toto()">
+                <span class="fa fa-plus"></span>
+                <span class="d-none d-md-inline">Join {{association.name}}</span>
+            </button>
+                <p id="join-assoc"></p>
+            </td>
         </tr>
+
         </tbody>
     </table>
 </div>
 
+<script type="text/javascript">
+
+    function toto() {
+        console.log(' marche tonpere');
+    }
+    /*    var txt;
+        if (confirm("Vous allez rejoindre l'association : {association.name}}")) {
+            txt = "Rejoindre";
+        } else {
+            txt = "Annuler";
+        }
+        document.getElementById("join-assoc").innerHTML = txt;
+    }*/
+</script>
