@@ -11,7 +11,7 @@ export const associationRoute: Routes = [
         path: 'association',
         component: AssociationComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'Associations'
         },
         canActivate: [UserRouteAccessService]
@@ -19,7 +19,7 @@ export const associationRoute: Routes = [
         path: 'association/:id',
         component: AssociationDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'Associations'
         },
         canActivate: [UserRouteAccessService]
@@ -31,7 +31,7 @@ export const associationPopupRoute: Routes = [
         path: 'association-new',
         component: AssociationPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'Associations'
         },
         canActivate: [UserRouteAccessService],
@@ -41,7 +41,7 @@ export const associationPopupRoute: Routes = [
         path: 'association/:id/edit',
         component: AssociationPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'Associations'
         },
         canActivate: [UserRouteAccessService],
@@ -51,7 +51,7 @@ export const associationPopupRoute: Routes = [
         path: 'association/:id/delete',
         component: AssociationDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'Associations'
         },
         canActivate: [UserRouteAccessService],
