@@ -28,6 +28,7 @@ import {
 } from './layouts';
 import { SearchAssociationsComponent } from './features/search-associations/search-associations.component';
 import {FeaturesModule} from './features/features.module';
+import { AssociationMembersComponent } from './association-members/association-members.component';
 
 @NgModule({
     imports: [
@@ -47,7 +48,8 @@ import {FeaturesModule} from './features/features.module';
         NavbarComponent,
         ErrorComponent,
         PageRibbonComponent,
-        FooterComponent
+        FooterComponent,
+        AssociationMembersComponent
     ],
     providers: [
         ProfileService,
