@@ -1,0 +1,58 @@
+<h2>Create your Association</h2>
+<div class="form-fields row col-md-12">
+    <div class="input-box col-md-3">
+        <div class="background-container">
+            <label class="field a-field a-field_a1 page__field">
+                <input class="field__input" placeholder="Exemple: Timbr'tac" [(ngModel)]="association.name" required>
+                <span class="field__label-wrap">
+                    <span class="field__label">Name</span>
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="input-box col-md-3">
+        <div class="background-container">
+            <label class="field a-field a-field_a1 page__field">
+                <input class="field__input" placeholder="Exemple: 02 rue des Lilas" [(ngModel)]="association.address" required>
+                <span class="field__label-wrap">
+                    <span class="field__label">Adresse</span>
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="input-box col-md-3">
+        <div class="background-container">
+            <label class="field a-field a-field_a1 page__field">
+                <input class="field__input" placeholder="Exemple: 75001" [(ngModel)]="association.postcode" required>
+                <span class="field__label-wrap">
+                    <span class="field__label">Code Postal</span>
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="input-box col-md-3">
+        <div class="background-container">
+            <label class="field a-field a-field_a1 page__field">
+                <input class="field__input" placeholder="Exemple: Paris" [(ngModel)]="association.city" required>
+                <span class="field__label-wrap">
+                    <span class="field__label">Ville</span>
+                </span>
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-fields">
+    <div class="input-box col-md-5 desc">
+        <div class="background-container">
+            <span>Description : </span><br>
+            <textarea [(ngModel)]="association.description" id="" cols="30" rows="2"></textarea>
+        </div>
+    </div>
+    <div class="input-box col-md-5 desc">
+        <div class="background-container">
+            <span>Image : </span><br>
+            <textarea [(ngModel)]="association.picture" id="" cols="30" rows="2"></textarea>
+        </div>
+    </div>
+</div>
+<button class="btn btn-val" (click)="createAssociation(association)">Valider</button>
