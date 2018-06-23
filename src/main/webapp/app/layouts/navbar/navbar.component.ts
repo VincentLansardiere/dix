@@ -6,6 +6,7 @@ import { ProfileService } from '../profiles/profile.service';
 import { Principal, LoginModalService, LoginService } from '../../shared';
 
 import { VERSION } from '../../app.constants';
+import {Association} from '../../entities/association';
 
 @Component({
     selector: 'jhi-navbar',
@@ -21,6 +22,8 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    currentAccount: any;
+    association: Association = new Association();
 
     constructor(
         private loginService: LoginService,
@@ -37,6 +40,9 @@ export class NavbarComponent implements OnInit {
         this.profileService.getProfileInfo().then((profileInfo) => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
+        });
+        this.principal.identity().then((account) => {
+            this.currentAccount = account;
         });
     }
 
