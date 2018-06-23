@@ -31,7 +31,7 @@ Create assoc / BUTTONS
 ===============================================================*/
 
 /* Buttons */
-.btn {
+.btn_p {
   border: none;
   font-family: inherit;
   font-size: inherit;
@@ -51,7 +51,7 @@ Create assoc / BUTTONS
   transition: all 0.3s;
 }
 
-.btn:after {
+.btn_p:after {
   content: '';
   position: absolute;
   z-index: -1;
