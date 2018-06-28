@@ -21,13 +21,6 @@ public class Assoc_members implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "members_id")
-    private Integer members_id;
-
-    @NotNull
-    @Column(name = "associations_id", nullable = false)
-    private Integer associations_id;
-
     @Column(name = "joined_date")
     private LocalDate joined_date;
 
@@ -44,32 +37,6 @@ public class Assoc_members implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getMembers_id() {
-        return members_id;
-    }
-
-    public Assoc_members members_id(Integer members_id) {
-        this.members_id = members_id;
-        return this;
-    }
-
-    public void setMembers_id(Integer members_id) {
-        this.members_id = members_id;
-    }
-
-    public Integer getAssociations_id() {
-        return associations_id;
-    }
-
-    public Assoc_members associations_id(Integer associations_id) {
-        this.associations_id = associations_id;
-        return this;
-    }
-
-    public void setAssociations_id(Integer associations_id) {
-        this.associations_id = associations_id;
     }
 
     public LocalDate getJoined_date() {
@@ -136,8 +103,6 @@ public class Assoc_members implements Serializable {
     public String toString() {
         return "Assoc_members{" +
             "id=" + getId() +
-            ", members_id=" + getMembers_id() +
-            ", associations_id=" + getAssociations_id() +
             ", joined_date='" + getJoined_date() + "'" +
             "}";
     }

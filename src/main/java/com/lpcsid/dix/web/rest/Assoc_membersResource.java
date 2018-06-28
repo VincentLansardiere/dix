@@ -1,23 +1,37 @@
 package com.lpcsid.dix.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.lpcsid.dix.domain.Assoc_members;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
 
-import com.lpcsid.dix.repository.Assoc_membersRepository;
-import com.lpcsid.dix.web.rest.errors.BadRequestAlertException;
-import com.lpcsid.dix.web.rest.util.HeaderUtil;
-import io.github.jhipster.web.util.ResponseUtil;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
+import com.codahale.metrics.annotation.Timed;
+import com.lpcsid.dix.domain.Assoc_members;
+import com.lpcsid.dix.domain.Association;
+import com.lpcsid.dix.domain.User;
+import com.lpcsid.dix.domain.UserProfile;
+import com.lpcsid.dix.repository.Assoc_membersRepository;
+import com.lpcsid.dix.repository.AssociationRepository;
+import com.lpcsid.dix.repository.UserProfileRepository;
+import com.lpcsid.dix.repository.UserRepository;
+import com.lpcsid.dix.web.rest.errors.BadRequestAlertException;
+import com.lpcsid.dix.web.rest.util.HeaderUtil;
 
-import java.util.List;
-import java.util.Optional;
+import io.github.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing Assoc_members.
@@ -32,11 +46,23 @@ public class Assoc_membersResource {
 
     private final Assoc_membersRepository assoc_membersRepository;
 
-    public Assoc_membersResource(Assoc_membersRepository assoc_membersRepository) {
-        this.assoc_membersRepository = assoc_membersRepository;
-    }
+    private final AssociationRepository assocRepository;
 
-    /**
+    private final UserRepository userRepository;
+
+    private final UserProfileRepository userProfileRepository;
+
+	public Assoc_membersResource(Assoc_membersRepository assoc_membersRepository, AssociationRepository assocRepository,
+			UserRepository userRepository, UserProfileRepository userProfileRepository) {
+		super();
+		this.assoc_membersRepository = assoc_membersRepository;
+		this.assocRepository = assocRepository;
+		this.userRepository = userRepository;
+		this.userProfileRepository = userProfileRepository;
+	}
+
+
+	/**
      * POST  /assoc-members : Create a new assoc_members.
      *
      * @param assoc_members the assoc_members to create
@@ -55,6 +81,34 @@ public class Assoc_membersResource {
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+    public static class AddAssocMemberRequest{
+        public long assocId, userId;
+    }
+
+    public static class AddAssocMemberResponse {
+        public long memberId;
+        public Assoc_members entity;
+		public AddAssocMemberResponse(long memberId, Assoc_members entity) {
+			super();
+			this.memberId = memberId;
+			this.entity = entity;
+		}
+    }
+
+    @PostMapping("/assoc-members/addAssocMember")
+    @Timed
+    public AddAssocMemberResponse addAssocMember(@RequestBody AddAssocMemberRequest req) throws URISyntaxException {
+        Association ass = assocRepository.findOne(req.assocId);
+        // User user = userRepository.findOne(req.userId);
+        UserProfile userProfile = userProfileRepository.findByUserIsCurrentUser().get(0);
+        Assoc_members entity = new Assoc_members();
+        entity.setAssociation(ass);
+        entity.setUserProfile(userProfile);
+    	entity = assoc_membersRepository.save(entity);
+        return new AddAssocMemberResponse(entity.getId(), entity);
+        }
+
 
     /**
      * PUT  /assoc-members : Updates an existing assoc_members.

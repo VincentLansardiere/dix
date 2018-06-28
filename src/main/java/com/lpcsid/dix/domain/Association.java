@@ -61,9 +61,9 @@ public class Association implements Serializable {
     private Set<Event> events = new HashSet<>();
 
     @ManyToMany
-    @JoinTable(name = "association_members",
-               joinColumns = @JoinColumn(name="associations_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="members_id", referencedColumnName="id"))
+    @JoinTable(name = "assoc_members",
+               joinColumns = @JoinColumn(name="association_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="user_profile_id", referencedColumnName="id"))
     private Set<UserProfile> members = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

@@ -48,7 +48,7 @@
         </button></td>
 
             <td>
-            <button type="button" class="btn btn-primary btn-info" ng-click="toto()">
+            <button type="button" class="btn btn-primary btn-info" (click)="addAssocMember(association)">
                 <span class="fa fa-plus"></span>
                 <span class="d-none d-md-inline">Join {{association.name}}</span>
             </button>

@@ -11,6 +11,11 @@ import { createRequestOption } from '../../shared';
 
 export type EntityResponseType = HttpResponse<Assoc_members>;
 
+export interface AddAssocMemberRequest {
+    assocId: number;
+    userId: number;
+}
+
 @Injectable()
 export class Assoc_membersService {
 
@@ -21,6 +26,11 @@ export class Assoc_membersService {
     create(assoc_members: Assoc_members): Observable<EntityResponseType> {
         const copy = this.convert(assoc_members);
         return this.http.post<Assoc_members>(this.resourceUrl, copy, { observe: 'response' })
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    addAssocMember(req: AddAssocMemberRequest): Observable<EntityResponseType> {
+        return this.http.post<Assoc_members>(this.resourceUrl + '/addAssocMember' , req, { observe: 'response' })
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 

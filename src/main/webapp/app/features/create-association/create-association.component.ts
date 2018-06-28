@@ -12,8 +12,9 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
   styles: []
 })
 export class CreateAssociationComponent implements OnInit {
-    associations: Association[] = Array<Association>();
-  currentAccount: any;
+  associations: Association[] = Array<Association>();
+  association: Association = new Association();
+  currentAccount: Account;
   eventSubscriber: Subscription;
   constructor(        private associationService: AssociationService,
                       private jhiAlertService: JhiAlertService,

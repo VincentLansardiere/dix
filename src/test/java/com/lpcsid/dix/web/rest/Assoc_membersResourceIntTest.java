@@ -4,6 +4,9 @@ import com.lpcsid.dix.DixApp;
 
 import com.lpcsid.dix.domain.Assoc_members;
 import com.lpcsid.dix.repository.Assoc_membersRepository;
+import com.lpcsid.dix.repository.AssociationRepository;
+import com.lpcsid.dix.repository.UserProfileRepository;
+import com.lpcsid.dix.repository.UserRepository;
 import com.lpcsid.dix.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -51,7 +54,17 @@ public class Assoc_membersResourceIntTest {
 
     @Autowired
     private Assoc_membersRepository assoc_membersRepository;
-
+    
+    @Autowired
+    private AssociationRepository assocRepository;
+    
+    @Autowired
+    private UserRepository userRepository;
+    
+    @Autowired
+    private UserProfileRepository userProfileRepository;
+    
+    
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
@@ -68,10 +81,14 @@ public class Assoc_membersResourceIntTest {
 
     private Assoc_members assoc_members;
 
+    
+    
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final Assoc_membersResource assoc_membersResource = new Assoc_membersResource(assoc_membersRepository);
+        final Assoc_membersResource assoc_membersResource = new Assoc_membersResource(
+        		assoc_membersRepository, assocRepository,
+    			userRepository, userProfileRepository);
         this.restAssoc_membersMockMvc = MockMvcBuilders.standaloneSetup(assoc_membersResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -87,8 +104,6 @@ public class Assoc_membersResourceIntTest {
      */
     public static Assoc_members createEntity(EntityManager em) {
         Assoc_members assoc_members = new Assoc_members()
-            .members_id(DEFAULT_MEMBERS_ID)
-            .associations_id(DEFAULT_ASSOCIATIONS_ID)
             .joined_date(DEFAULT_JOINED_DATE);
         return assoc_members;
     }
@@ -113,8 +128,6 @@ public class Assoc_membersResourceIntTest {
         List<Assoc_members> assoc_membersList = assoc_membersRepository.findAll();
         assertThat(assoc_membersList).hasSize(databaseSizeBeforeCreate + 1);
         Assoc_members testAssoc_members = assoc_membersList.get(assoc_membersList.size() - 1);
-        assertThat(testAssoc_members.getMembers_id()).isEqualTo(DEFAULT_MEMBERS_ID);
-        assertThat(testAssoc_members.getAssociations_id()).isEqualTo(DEFAULT_ASSOCIATIONS_ID);
         assertThat(testAssoc_members.getJoined_date()).isEqualTo(DEFAULT_JOINED_DATE);
     }
 
@@ -141,9 +154,6 @@ public class Assoc_membersResourceIntTest {
     @Transactional
     public void checkAssociations_idIsRequired() throws Exception {
         int databaseSizeBeforeTest = assoc_membersRepository.findAll().size();
-        // set the field null
-        assoc_members.setAssociations_id(null);
-
         // Create the Assoc_members, which fails.
 
         restAssoc_membersMockMvc.perform(post("/api/assoc-members")
@@ -207,8 +217,6 @@ public class Assoc_membersResourceIntTest {
         // Disconnect from session so that the updates on updatedAssoc_members are not directly saved in db
         em.detach(updatedAssoc_members);
         updatedAssoc_members
-            .members_id(UPDATED_MEMBERS_ID)
-            .associations_id(UPDATED_ASSOCIATIONS_ID)
             .joined_date(UPDATED_JOINED_DATE);
 
         restAssoc_membersMockMvc.perform(put("/api/assoc-members")
@@ -220,8 +228,6 @@ public class Assoc_membersResourceIntTest {
         List<Assoc_members> assoc_membersList = assoc_membersRepository.findAll();
         assertThat(assoc_membersList).hasSize(databaseSizeBeforeUpdate);
         Assoc_members testAssoc_members = assoc_membersList.get(assoc_membersList.size() - 1);
-        assertThat(testAssoc_members.getMembers_id()).isEqualTo(UPDATED_MEMBERS_ID);
-        assertThat(testAssoc_members.getAssociations_id()).isEqualTo(UPDATED_ASSOCIATIONS_ID);
         assertThat(testAssoc_members.getJoined_date()).isEqualTo(UPDATED_JOINED_DATE);
     }
 

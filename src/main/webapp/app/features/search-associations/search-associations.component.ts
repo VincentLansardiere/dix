@@ -15,7 +15,8 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class SearchAssociationsComponent implements OnInit, OnDestroy {
     associations: Association[] = Array<Association>();
-    currentAccount: any;
+    assoc_member: Assoc_members = new Assoc_members();
+    currentAccount: Account;
     eventSubscriber: Subscription;
 
     constructor(private associationService: AssociationService,
@@ -44,17 +45,22 @@ export class SearchAssociationsComponent implements OnInit, OnDestroy {
     trackId(index: number, item: Association) {
         return item.id;
     }
-    createAssocMember(assoc_member: Assoc_members) {
-        assoc_member.userProfile = this.currentAccount;
-        this.assoc_membersService.create(assoc_member).subscribe((response) => {
+
+    addAssocMember(association: Association) {
+        this.assoc_member.association = association;
+        this.assoc_member.userProfile = this.currentAccount;
+        const date = new Date('2018-06-28');
+        // this.assoc_member.joined_date = date;
+        const req = { assocId: this.assoc_member.association.id, userId: parseInt(this.currentAccount.id) };
+        this.assoc_membersService.addAssocMember(req).subscribe((response) => {
             console.log(response);
         }, (error) => {
             console.log(error);
         });
     }
 
-    toto() {
-        alert('it works');
+    toto(values: Association) {
+        alert(values);
     }
 
     loadAll() {
