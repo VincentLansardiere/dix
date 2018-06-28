@@ -1,0 +1,41 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "userProfile",
+            "otherEntityName": "userProfile",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "association",
+            "otherEntityName": "association",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "members_id",
+            "fieldType": "Integer",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "associations_id",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "joined_date",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20180625212248",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "assoc_members",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

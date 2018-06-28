@@ -1,0 +1,69 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myAssoc_membersLabel">Create or edit a Assoc Members</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!assoc_members.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="assoc_members.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_members_id">Members Id</label>
+            <input type="number" class="form-control" name="members_id" id="field_members_id"
+                [(ngModel)]="assoc_members.members_id" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_associations_id">Associations Id</label>
+            <input type="number" class="form-control" name="associations_id" id="field_associations_id"
+                [(ngModel)]="assoc_members.associations_id" required/>
+            <div [hidden]="!(editForm.controls.associations_id?.dirty && editForm.controls.associations_id?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.associations_id?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.associations_id?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_joined_date">Joined Date</label>
+            <div class="input-group">
+                <input id="field_joined_date" type="text" class="form-control" name="joined_date" ngbDatepicker  #joined_dateDp="ngbDatepicker" [(ngModel)]="assoc_members.joined_date"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="joined_dateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_userProfile">User Profile</label>
+            <select class="form-control" id="field_userProfile" name="userProfile" [(ngModel)]="assoc_members.userProfile" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userProfileOption.id === assoc_members.userProfile?.id ? assoc_members.userProfile : userProfileOption" *ngFor="let userProfileOption of userprofiles; trackBy: trackUserProfileById">{{userProfileOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_association">Association</label>
+            <select class="form-control" id="field_association" name="association" [(ngModel)]="assoc_members.association" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="associationOption.id === assoc_members.association?.id ? assoc_members.association : associationOption" *ngFor="let associationOption of associations; trackBy: trackAssociationById">{{associationOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
