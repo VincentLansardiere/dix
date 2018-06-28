@@ -7,13 +7,14 @@ import {SearchAssociationsComponent} from './search-associations/search-associat
 import {CommonModule} from '@angular/common';
 
 import { CreateAssociationComponent } from './create-association/create-association.component';
+import {DixSharedModule} from '../shared';
 
 const ENTITY_STATES = [
 ];
 
 @NgModule({
     imports: [
-
+        DixSharedModule,
         CommonModule,
         RouterModule,
         FormsModule,

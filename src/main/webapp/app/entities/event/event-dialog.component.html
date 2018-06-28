@@ -92,7 +92,7 @@
             <label class="form-control-label" for="field_association">Association</label>
             <select class="form-control" id="field_association" name="association" [(ngModel)]="event.association" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="associationOption.id === event.association?.id ? event.association : associationOption" *ngFor="let associationOption of associations; trackBy: trackAssociationById">{{associationOption.id}}</option>
+                <option [ngValue]="associationOption.id === event.association?.id ? event.association : associationOption" *ngFor="let associationOption of associations; trackBy: trackAssociationById">{{associationOption.name}}</option>
             </select>
         </div>
     </div>

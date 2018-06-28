@@ -1,6 +1,8 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import { Association } from '../../entities/association/association.model';
 import { AssociationService } from '../../entities/association/association.service';
+import {Assoc_membersService} from '../../entities/assoc-members/assoc-members.service';
+import {Assoc_members} from '../../entities/assoc-members/assoc-members.model';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 import {Principal} from '../../shared';
@@ -17,6 +19,7 @@ export class SearchAssociationsComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
 
     constructor(private associationService: AssociationService,
+                private assoc_membersService: Assoc_membersService,
                 private jhiAlertService: JhiAlertService,
                 private eventManager: JhiEventManager,
                 private principal: Principal) {}
@@ -40,6 +43,14 @@ export class SearchAssociationsComponent implements OnInit, OnDestroy {
 
     trackId(index: number, item: Association) {
         return item.id;
+    }
+    createAssocMember(assoc_member: Assoc_members) {
+        assoc_member.userProfile = this.currentAccount;
+        this.assoc_membersService.create(assoc_member).subscribe((response) => {
+            console.log(response);
+        }, (error) => {
+            console.log(error);
+        });
     }
 
     toto() {

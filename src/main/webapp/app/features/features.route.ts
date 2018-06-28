@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-
 import {SearchAssociationsComponent} from './search-associations/search-associations.component';
 import {CreateAssociationComponent} from './create-association/create-association.component';
 
@@ -8,9 +7,11 @@ export const featuresRoute: Routes = [
         path: 'search-assoc',
         component: SearchAssociationsComponent,
         data: {
-            pageTitle: 'searchAssociation'
-        }
+            pageTitle: 'searchAssociation',
+            authorities: ['ROLE_USER'],
+        },
     },
+
     {
         path: 'create-assoc',
         component: CreateAssociationComponent,

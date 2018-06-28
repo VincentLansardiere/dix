@@ -11,6 +11,7 @@
     <include file="config/liquibase/changelog/20180524143332_added_entity_Category.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180524143333_added_entity_UserEventParticipation.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180524143334_added_entity_AssociationUserRole.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180625212248_added_entity_Assoc_members.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180524143329_added_entity_constraints_UserProfile.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180524143330_added_entity_constraints_Association.xml" relativeToChangelogFile="false"/>
@@ -18,5 +19,6 @@
     <include file="config/liquibase/changelog/20180524143332_added_entity_constraints_Category.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180524143333_added_entity_constraints_UserEventParticipation.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180524143334_added_entity_constraints_AssociationUserRole.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180625212248_added_entity_constraints_Assoc_members.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
