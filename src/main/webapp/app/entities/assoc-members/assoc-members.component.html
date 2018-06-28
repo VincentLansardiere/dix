@@ -1,0 +1,74 @@
+<div>
+    <h2>
+        <span>Assoc Members</span>
+        <button class="btn btn-primary float-right jh-create-entity create-assoc-members" [routerLink]="['/', { outlets: { popup: ['assoc-members-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Assoc Members
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="assoc_members">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Members Id</span></th>
+            <th><span>Associations Id</span></th>
+            <th><span>Joined Date</span></th>
+            <th><span>User Profile</span></th>
+            <th><span>Association</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let assoc_members of assoc_members ;trackBy: trackId">
+                <td><a [routerLink]="['../assoc-members', assoc_members.id ]">{{assoc_members.id}}</a></td>
+                <td>{{assoc_members.members_id}}</td>
+                <td>{{assoc_members.associations_id}}</td>
+                <td>{{assoc_members.joined_date | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="assoc_members.userProfile">
+                        <a [routerLink]="['../user-profile', assoc_members.userProfile?.id ]" >{{assoc_members.userProfile?.lastname}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="assoc_members.association">
+                        <a [routerLink]="['../association', assoc_members.association?.id ]" >{{assoc_members.association?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../assoc-members', assoc_members.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'assoc-members/'+ assoc_members.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'assoc-members/'+ assoc_members.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

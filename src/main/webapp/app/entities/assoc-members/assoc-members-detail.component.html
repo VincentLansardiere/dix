@@ -1,0 +1,46 @@
+
+<div *ngIf="assoc_members">
+    <h2><span>Assoc Members</span> {{assoc_members.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Members Id</span></dt>
+        <dd>
+            <span>{{assoc_members.members_id}}</span>
+        </dd>
+        <dt><span>Associations Id</span></dt>
+        <dd>
+            <span>{{assoc_members.associations_id}}</span>
+        </dd>
+        <dt><span>Joined Date</span></dt>
+        <dd>
+            <span>{{assoc_members.joined_date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>User Profile</span></dt>
+        <dd>
+            <div *ngIf="assoc_members.userProfile">
+                <a [routerLink]="['/user-profile', assoc_members.userProfile?.id]">{{assoc_members.userProfile?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Association</span></dt>
+        <dd>
+            <div *ngIf="assoc_members.association">
+                <a [routerLink]="['/association', assoc_members.association?.id]">{{assoc_members.association?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'assoc-members/'+ assoc_members.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
