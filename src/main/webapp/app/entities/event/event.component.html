@@ -40,7 +40,7 @@
                 <td>{{event.recurrence}}</td>
                 <td>
                     <div *ngIf="event.association">
-                        <a [routerLink]="['../association', event.association?.id ]" >{{event.association?.id}}</a>
+                        <a [routerLink]="['../association', event.association?.id ]" >{{event.association?.name}}</a>
                     </div>
                 </td>
                 <td class="text-right">

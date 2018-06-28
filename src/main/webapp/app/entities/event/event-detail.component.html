@@ -35,7 +35,7 @@
         <dt><span>Association</span></dt>
         <dd>
             <div *ngIf="event.association">
-                <a [routerLink]="['/association', event.association?.id]">{{event.association?.id}}</a>
+                <a [routerLink]="['/association', event.association?.id]">{{event.association?.name}}</a>
             </div>
         </dd>
     </dl>
