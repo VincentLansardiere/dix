@@ -5,6 +5,7 @@ import com.lpcsid.dix.config.Constants;
 import com.lpcsid.dix.domain.Authority;
 import com.lpcsid.dix.domain.User;
 
+import com.lpcsid.dix.domain.UserProfile;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -52,6 +53,8 @@ public class UserDTO {
     private Instant lastModifiedDate;
 
     private Set<String> authorities;
+
+    private UserProfile profile;
 
     public UserDTO() {
         // Empty constructor needed for Jackson.

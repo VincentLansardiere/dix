@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { SERVER_API_URL } from '../../app.constants';
 
 import { JhiDateUtils } from 'ng-jhipster';
 
 import { UserProfile } from './user-profile.model';
-import { createRequestOption } from '../../shared';
+import {createRequestOption, User} from '../../shared';
 
 export type EntityResponseType = HttpResponse<UserProfile>;
 
@@ -14,6 +14,8 @@ export type EntityResponseType = HttpResponse<UserProfile>;
 export class UserProfileService {
 
     private resourceUrl =  SERVER_API_URL + 'api/user-profiles';
+
+    private params = new HttpParams();
 
     constructor(private http: HttpClient, private dateUtils: JhiDateUtils) { }
 
@@ -32,6 +34,16 @@ export class UserProfileService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<UserProfile>(`${this.resourceUrl}/${id}`, { observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    findFromUserId(user_id: number): Observable<HttpResponse<UserProfile>> {
+        return this.http.get<UserProfile>(`${this.resourceUrl + '/findUserAccount'}/${user_id}`, { observe: 'response'})
+            .map((res: HttpResponse<UserProfile>) => this.convertResponse(res));
+    }
+
+    findFromPrincipal(): Observable<HttpResponse<UserProfile[]>> {
+        return this.http.get<UserProfile[]>(`${this.resourceUrl + '/findUserFromPrincipal'}`, { observe: 'response'})
+            .map((res: HttpResponse<UserProfile[]>) => this.convertArrayResponse(res));
     }
 
     query(req?: any): Observable<HttpResponse<UserProfile[]>> {

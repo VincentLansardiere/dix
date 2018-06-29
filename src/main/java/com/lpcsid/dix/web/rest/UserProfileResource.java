@@ -1,6 +1,7 @@
 package com.lpcsid.dix.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.lpcsid.dix.domain.User;
 import com.lpcsid.dix.domain.UserProfile;
 
 import com.lpcsid.dix.repository.UserProfileRepository;
@@ -102,6 +103,34 @@ public class UserProfileResource {
         log.debug("REST request to get UserProfile : {}", id);
         UserProfile userProfile = userProfileRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userProfile));
+    }
+
+
+    /**
+     * GET  /user-profiles/:id : get the "id" userProfile.
+     *
+     * @param user_id the id of the userProfile to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the userProfile, or with status 404 (Not Found)
+     */
+    @GetMapping("/user-profiles/findUserAccount/{user_id}")
+    @Timed
+    public ResponseEntity<UserProfile> getUserProfileFromUser(@PathVariable Long user_id) {
+        log.debug("REST request to get UserProfile from id user: {}", user_id);
+        UserProfile userProfile = userProfileRepository.findUserProfile(user_id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userProfile));
+    }
+
+    /**
+     * GET  /user-profiles/:id : get the "id" userProfile.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the userProfile, or with status 404 (Not Found)
+     */
+    @GetMapping("/user-profiles/findUserFromPrincipal")
+    @Timed
+    public ResponseEntity<UserProfile[]> getUserProfileFromPrincipal() {
+        log.debug("REST request to get UserProfile from id user: {}");
+        UserProfile[] userProfiles = userProfileRepository.findByUserIsCurrentUser();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userProfiles));
     }
 
     /**
